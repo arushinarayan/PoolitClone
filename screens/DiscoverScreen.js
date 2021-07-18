@@ -1,15 +1,28 @@
 import React from 'react';
-import {StyleSheet, View, Text, Image, TouchableOpacity, ScrollView} from 'react-native';
+import {StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, FlatList} from 'react-native';
 
 import Header from '../components/Header';
 import  Colors from '../constants/Colors';
 import SearchBar from '../components/SearchBar';
 import LocationBubble from '../components/LocationBubbles';
-import Category from '../components/Category';
+import { CATEGORIES } from '../data/dummy-data';
+import CategoryGridTile from '../components/CategoryGridTile';
 
 const DiscoverScreen = props => {
+const renderGridItem = itemData => {
+    return(
+      <View style={styles.screen}>
+      <CategoryGridTile title={itemData.item.title} 
+      image={itemData.item.imageUrl}
+      numberOfProducts={itemData.item.numberOfProducts}
+       onSelect={()=> { props.navigation.navigate('Category', {
+        categoryId: itemData.item.categoryId
+       })}}/>
+          </View>
+    );
+  };
 return (
-<View style={styles.screen}>
+<View>
 <Header title="Classifieds"/>
 <Text style={styles.titleText}>Discover</Text>
 <SearchBar/>
@@ -31,51 +44,22 @@ return (
 </ScrollView>
 </View>
 <Text style={styles.categoryText}>Categories</Text>
-<ScrollView>
-<View style={styles.categories}>
-  <Category>
-        <Image source={require('../constants/Images/Mobile Phones.png')}/>
-        <Text>Mobile Phones</Text>
-        <Text>20 Products</Text>
-  </Category>
-  <Category>
-        <Image source={require('../constants/Images/Mobile Phones.png')}/>
-        <Text>Mobile Phones</Text>
-        <Text>20 Products</Text>
-  </Category>
-</View>
-<View style={styles.categories}>
-<Category>
-        <Image source={require('../constants/Images/Mobile Phones.png')}/>
-        <Text>Mobile Phones</Text>
-        <Text>20 Products</Text>
-  </Category>
-  <Category>
-        <Image source={require('../constants/Images/Mobile Phones.png')}/>
-        <Text>Mobile Phones</Text>
-        <Text>20 Products</Text>
-  </Category>
-</View>
-<View style={styles.categories}>
-<Category>
-        <Image source={require('../constants/Images/Mobile Phones.png')}/>
-        <Text>Mobile Phones</Text>
-        <Text>20 Products</Text>
-  </Category>
-  <Category>
-        <Image source={require('../constants/Images/Mobile Phones.png')}/>
-        <Text>Mobile Phones</Text>
-        <Text>20 Products</Text>
-  </Category>
-</View>
-</ScrollView>
+<FlatList
+      keyExtractor={(item, index) => item.id}
+      data={CATEGORIES}
+      renderItem={renderGridItem}
+      numColumns={2}
+      ListFooterComponent={<View style={{height: 450}}/>}
+    />
 </View>
 );
 };
 
 const styles = StyleSheet.create({
 screen:{
-flex: 1
+flex: 1,
+justifyContent: 'space-around',
+alignItems: 'center'
 },
 titleText:{
 fontSize: 24,
@@ -113,11 +97,7 @@ categoryText:{
   paddingLeft: 22,
   paddingTop: 10
 },
-categories:{
-  padding: 15,
-  flexDirection: 'row',
-  justifyContent:'space-around'
-}
+
 });
 
 export default DiscoverScreen;

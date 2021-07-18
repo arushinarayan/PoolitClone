@@ -1,13 +1,64 @@
 import React from 'react';
 import {StyleSheet, View, Text, Image, TouchableOpacity, Dimensions} from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import DiscoverScreen from '../screens/DiscoverScreen';
 import MyOffersScreen from '../screens/MyOffersScreen';
 import MyAdsScreen from '../screens/MyAdsScreen';
 import CreateAdScreen from '../screens/CreateAdScreen';
 import CommunityScreen from '../screens/CommunityScreen';
+import AdDetailsScreen from '../screens/AdDetailsScreen';
+import CategoryScreen from '../screens/CategoryScreen';
+import CreateAdDetailsScreen from '../screens/CreateAdDetailsScreem'
 import  Colors from '../constants/Colors';
+
+const defaultStackNavOptions ={
+  headerStyle: {
+    backgroundColor: 'white',
+    borderBottomEndRadius: 10,
+    borderBottomLeftRadius: 10,
+    borderBottomColor: 'black',
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity:  0.1,
+    shadowRadius: 3,
+    elevation: 5,
+    borderRadius: 10,
+    },
+    headerTitleStyle: {
+      color: Colors.green,
+      fontSize: 18,
+      fontWeight: 'bold',
+    },
+    headerTitleAlign: 'left',
+    headerBackImage: ()=>(<Image source={require('../constants/Images/BackButton.png')} 
+    style={{marginLeft: 10}}/>),
+    headerBackTitleVisible: false
+}
+
+const AdsNavigator = createStackNavigator ();
+const AdsStack = () => {
+  return (
+  <AdsNavigator.Navigator 
+  initialRouteName="Discover" >
+  <AdsNavigator.Screen name="Discover" component={DiscoverScreen} options={{headerShown: false}}/>
+  <AdsNavigator.Screen name="Category" component={CategoryScreen} options={defaultStackNavOptions}/>
+  <AdsNavigator.Screen name="Ad" component={AdDetailsScreen} options={defaultStackNavOptions}/>
+  </AdsNavigator.Navigator> 
+  );
+};
+
+const CreateAdsNavigator = createStackNavigator();
+const CreateAdsStack = () => {
+  return (
+  <CreateAdsNavigator.Navigator 
+  initialRouteName="CreateAd" >
+  <CreateAdsNavigator.Screen name="CreateAd" component={CreateAdScreen} options={{headerShown: false}}/>
+  <CreateAdsNavigator.Screen name="CreateAdDetails" component={CreateAdDetailsScreen} options={defaultStackNavOptions}/>
+  </CreateAdsNavigator.Navigator> 
+  );
+};
 
 const Tab = createBottomTabNavigator();
 const CustomTabBarButton = ({children, onPress}) => (
@@ -30,12 +81,13 @@ const NavBar = () => {
           borderTopEndRadius: 10,
           backgroundColor: 'white',
           height: Dimensions.get('window').height * 0.10
-        }
+        },
+        headerShown:false
       }}
     >
     <Tab.Screen 
     name="Discover" 
-    component={DiscoverScreen} 
+    component={AdsStack} 
     options={{
       tabBarIcon: ({focused}) => (
         <View style={styles.iconContainer}>
@@ -71,7 +123,7 @@ const NavBar = () => {
         </View>
       ),
     }}/>
-    <Tab.Screen name="CreateAd" component={CreateAdScreen}
+    <Tab.Screen name="CreateAd" component={CreateAdsStack}
     options= {{
       tabBarIcon: ({focused}) => (
         <Image source={require('../constants/Images/CreateAd.png')} 

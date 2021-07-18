@@ -1,58 +1,41 @@
 import React from 'react';
-import {StyleSheet, View, Text, ScrollView, Image} from 'react-native';
+import {StyleSheet, View, Text, FlatList} from 'react-native';
 
 import Header from '../components/Header';
 import  Colors from '../constants/Colors';
-import Category from '../components/Category';
+import { CATEGORIES } from '../data/dummy-data';
+import CategoryGridTile from '../components/CategoryGridTile';
 
 const CreateAdScreen = props => {
+  const renderGridItem = itemData => {
+    return(
+      <View style={styles.screen}>
+      <CategoryGridTile title={itemData.item.title} 
+      image={itemData.item.imageUrl}/>
+      </View>
+    );
+  };
 return (
 <View flex={1}>
 <Header title="Create Ad"/>
 <Text style={styles.categoryText}>Select Category</Text>
-<ScrollView>
-<View style={styles.categories}>
-  <Category>
-        <Image source={require('../constants/Images/Mobile Phones.png')}/>
-        <Text>Mobile Phones</Text>
-        <Text>20 Products</Text>
-  </Category>
-  <Category>
-        <Image source={require('../constants/Images/Mobile Phones.png')}/>
-        <Text>Mobile Phones</Text>
-        <Text>20 Products</Text>
-  </Category>
-</View>
-<View style={styles.categories}>
-<Category>
-        <Image source={require('../constants/Images/Mobile Phones.png')}/>
-        <Text>Mobile Phones</Text>
-        <Text>20 Products</Text>
-  </Category>
-  <Category>
-        <Image source={require('../constants/Images/Mobile Phones.png')}/>
-        <Text>Mobile Phones</Text>
-        <Text>20 Products</Text>
-  </Category>
-</View>
-<View style={styles.categories}>
-<Category>
-        <Image source={require('../constants/Images/Mobile Phones.png')}/>
-        <Text>Mobile Phones</Text>
-        <Text>20 Products</Text>
-  </Category>
-  <Category>
-        <Image source={require('../constants/Images/Mobile Phones.png')}/>
-        <Text>Mobile Phones</Text>
-        <Text>20 Products</Text>
-  </Category>
-</View>
-</ScrollView>
+<FlatList
+      keyExtractor={(item, index) => item.id}
+      data={CATEGORIES}
+      renderItem={renderGridItem}
+      numColumns={2}
+      ListFooterComponent={<View style={{height: 450}}/>}
+    />
 </View>
 );
 };
 
 const styles = StyleSheet.create({
+  screen:{
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+    },
   categoryText:{
     fontSize: 16,
     fontWeight: '500',
