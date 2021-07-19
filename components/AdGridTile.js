@@ -1,10 +1,13 @@
 import React from 'react';
-import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, Image, Platform, TouchableNativeFeedback} from 'react-native';
 import Colors from '../constants/Colors'
 
 const CategoryGridTile = props => {
+  let TouchableCmp = TouchableOpacity;
+  if (Platform.OS === 'android' && Platform.Version >=21) { TouchableCmp = TouchableNativeFeedback;}
   return (
-    <TouchableOpacity onPress={props.onSelect}>
+    <View style={{flex:1}}>
+    <TouchableCmp onPress={props.onSelect}>
     <View style={{...styles.card, ...props.style}}>
     <Image style= {styles.image} source={{uri: props.image}} />
     <View style={styles.textContainer}>
@@ -16,7 +19,8 @@ const CategoryGridTile = props => {
    </View>
     </View>
   </View>
-    </TouchableOpacity>
+    </TouchableCmp>
+    </View>
   );
 };
 
