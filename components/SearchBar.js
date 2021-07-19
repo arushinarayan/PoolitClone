@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Image, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Image, TouchableOpacity, Dimensions} from 'react-native';
 import  Colors from '../constants/Colors';
 
 const SearchBar = props => {
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
   searchBar: {
     height: 34,
-    width: 360,
+    width: Dimensions.get('window').width * 0.90,
     borderRadius: 16,
     backgroundColor: Colors.lightgrey,
   },

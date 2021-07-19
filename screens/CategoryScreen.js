@@ -3,9 +3,8 @@ import {StyleSheet, View, Text, TouchableOpacity, ScrollView, FlatList} from 're
 import  Colors from '../constants/Colors';
 import SearchBar from '../components/SearchBar';
 import LocationBubble from '../components/LocationBubbles';
-import { CATEGORIES, ADS} from '../data/dummy-data';
-import AdDetailsScreen from '../screens/AdDetailsScreen';
 import AdGridTile from '../components/AdGridTile';
+import {ADS} from '../data/dummy-data'
 
 const CategoryScreen = props => {
   const renderAdItem = itemData => {
@@ -27,7 +26,7 @@ const CategoryScreen = props => {
   };
 
 return (
-<View>
+<View style={{backgroundColor: 'white'}}>
 <SearchBar/>
 <View style={styles.locationTextContainer}>
 <Text style={styles.locationText}>By locations</Text>

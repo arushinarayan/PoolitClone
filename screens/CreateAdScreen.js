@@ -16,7 +16,7 @@ const CreateAdScreen = props => {
     );
   };
 return (
-<View flex={1}>
+<View style= {{flex: 1, backgroundColor: 'white'}}>
 <Header title="Create Ad"/>
 <Text style={styles.categoryText}>Select Category</Text>
 <FlatList
@@ -34,7 +34,8 @@ const styles = StyleSheet.create({
   screen:{
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: 'white'
     },
   categoryText:{
     fontSize: 16,

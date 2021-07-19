@@ -22,7 +22,7 @@ const renderGridItem = itemData => {
     );
   };
 return (
-<View>
+<View style={{backgroundColor: 'white'}}>
 <Header title="Classifieds"/>
 <Text style={styles.titleText}>Discover</Text>
 <SearchBar/>

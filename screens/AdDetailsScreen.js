@@ -4,7 +4,7 @@ import Colors from '../constants/Colors';
 
 const AdDetailScreen = props => {
 return (
-<View style={{flex:1, paddingTop: 350, alignItems: 'center'}}>
+<View style={{flex:1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white'}}>
 <Text style={{fontSize: 25, fontWeight: '400', color: Colors.green}}>Ad Details</Text>
 </View>
 );

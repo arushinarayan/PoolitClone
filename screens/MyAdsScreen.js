@@ -23,7 +23,8 @@ return (
 
 const styles = StyleSheet.create({
 screen:{
-flex: 1
+flex: 1,
+backgroundColor: 'white'
   },
 image:{
 width: 220,

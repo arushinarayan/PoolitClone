@@ -3,7 +3,7 @@ import {StyleSheet, View, Text} from 'react-native';
 
 const CreateAdDetailsScreen = props => {
 return (
-<View>
+<View style={{backgroundColor: 'white'}}>
   <Text>
   Create Ad Details Screen
   </Text>

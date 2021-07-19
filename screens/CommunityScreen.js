@@ -19,12 +19,13 @@ return (
 
 const styles = StyleSheet.create({
 screen:{
-flex: 1 },
+flex: 1,
+backgroundColor: 'white'},
 image:{
 width: 165,
 height: 177,
 marginLeft: 97,
-marginTop: 60
+marginTop: 60,
 },
 text:{
 fontSize: 20,
